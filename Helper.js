@@ -143,8 +143,8 @@ export const isNumber = (number) => {
     return regexp.test(number);
 }
 
-export const redirect(pathname, args = {}) {
+export const redirect = (pathname, args = {}) => {
     History.push(pathname, args);
 }
 
-export const alert = alert;
+export const toss = alert;
