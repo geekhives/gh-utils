@@ -5,11 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Service = exports.Helper = undefined;
 
-var _Helper = require('./Helper');
+var _Helper = require('./src/Helper');
 
 var _Helper2 = _interopRequireDefault(_Helper);
 
-var _Service = require('./Service');
+var _Service = require('./src/Service');
 
 var _Service2 = _interopRequireDefault(_Service);
 
