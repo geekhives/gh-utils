@@ -1,5 +1,6 @@
 import { call, put } from 'redux-saga/effects'
 import alert from 'react-s-alert';
+import History from './History';
 import _ from 'lodash';
 
 export const amountFormat = amount => {
@@ -136,12 +137,14 @@ export function* watchApiReponse(response = {}, responseOk = function* (){}, res
     }
 }
 
-const isNumber = (number) => {
+export const isNumber = (number) => {
     if(_.isEmpty(`${number}`)) return true;
     const regexp = /^[0-9]+([,.][0-9]+)?$/g;
     return regexp.test(number);
 }
 
-export {
-    isNumber
+export const redirect(pathname, args = {}) {
+    History.push(pathname, args);
 }
+
+export const alert = alert;
