@@ -136,12 +136,8 @@ export function* watchApiReponse(response = {}, responseOk = function* (){}, res
     }
 }
 
-const isNumber = (number) => {
+export const isNumber = (number) => {
     if(_.isEmpty(`${number}`)) return true;
     const regexp = /^[0-9]+([,.][0-9]+)?$/g;
     return regexp.test(number);
-}
-
-export {
-    isNumber
 }

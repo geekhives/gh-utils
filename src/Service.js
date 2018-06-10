@@ -1,6 +1,7 @@
 import axios from "axios";
 import _ from "lodash";
 
+
 const getToken = () => {
     const token = sessionStorage.getItem("token");
     return !_.isNil(token) ? token : false;

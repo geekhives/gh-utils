@@ -1,5 +1,5 @@
-import Helper from './src/Helper';
-import Service from './src/Service';
+import * as Helper from './Helper';
+import * as Service from './src/Service';
 
 export {
     Helper,

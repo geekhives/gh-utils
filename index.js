@@ -5,15 +5,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Service = exports.Helper = undefined;
 
-var _Helper = require('./src/Helper');
+var _Helper = require('./Helper');
 
-var _Helper2 = _interopRequireDefault(_Helper);
+var Helper = _interopRequireWildcard(_Helper);
 
 var _Service = require('./src/Service');
 
-var _Service2 = _interopRequireDefault(_Service);
+var Service = _interopRequireWildcard(_Service);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-exports.Helper = _Helper2.default;
-exports.Service = _Service2.default;
+exports.Helper = Helper;
+exports.Service = Service;
