@@ -1,7 +1,9 @@
-import * as Helper from './src/Helper';
-import * as Service from './src/Service';
+import * as Helper from './Helper';
+import * as Service from './Service';
+import History from './History';
 
 export {
     Helper,
-    Service
+    Service,
+    History
 }
