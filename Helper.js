@@ -1,11 +1,15 @@
 'use strict';
 
+// require('babel-polyfill');
+
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.toss = exports.redirect = exports.isNumber = exports.getFirstMessage = exports.transform = exports.loadAPI = exports.secToTime = exports.sessionStorageGetItem = exports.sessionStoreSetItem = exports.amountFormat = undefined;
 exports.api = api;
 exports.watchApiReponse = watchApiReponse;
+
+require('babel-polyfill');
 
 var _effects = require('redux-saga/effects');
 

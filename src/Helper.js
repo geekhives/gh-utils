@@ -1,3 +1,7 @@
+'use strict';
+
+// require('babel-polyfill');
+import 'babel-polyfill';
 import { call, put } from 'redux-saga/effects'
 import alert from 'react-s-alert';
 import History from './History';
