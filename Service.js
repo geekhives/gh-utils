@@ -1,110 +1,118 @@
-import axios from "axios";
-import _ from "lodash";
+"use strict";
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.externalUrl = exports.get = exports.put = exports.post = undefined;
 
-const getToken = () => {
-    const token = sessionStorage.getItem("token");
-    return !_.isNil(token) ? token : false;
+var _axios = require("axios");
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _lodash = require("lodash");
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var getToken = function getToken() {
+    var token = sessionStorage.getItem("token");
+    return !_lodash2.default.isNil(token) ? token : false;
 };
 
-const transform = object => {
-    let arr = [];
-    for (let p in object) {
+var transform = function transform(object) {
+    var arr = [];
+
+    var _loop = function _loop(p) {
         if (object.hasOwnProperty(p) && !Array.isArray(object[p])) {
-            arr.push(
-                encodeURIComponent(p) + "=" + encodeURIComponent(object[p])
-            );
+            arr.push(encodeURIComponent(p) + "=" + encodeURIComponent(object[p]));
         }
 
         if (Array.isArray(object[p])) {
-            object[p].forEach((item, key) => {
-                arr.push(
-                    encodeURIComponent(`${p}[${key}]`) +
-                        "=" +
-                        encodeURIComponent(item)
-                );
+            object[p].forEach(function (item, key) {
+                arr.push(encodeURIComponent(p + "[" + key + "]") + "=" + encodeURIComponent(item));
             });
         }
+    };
+
+    for (var p in object) {
+        _loop(p);
     }
     return arr.join("&");
 };
 
-const instance = axios.create({
+var instance = _axios2.default.create({
     timeout: 30000,
     baseURL: process.env.REACT_APP_END_POINT,
     transformRequest: transform,
-    transformResponse: (response) => {
+    transformResponse: function transformResponse(response) {
         try {
-            const newResponse = JSON.parse(response);
-            if(newResponse.status === 403 && newResponse.message === "Token Expired") {
+            var newResponse = JSON.parse(response);
+            if (newResponse.status === 403 && newResponse.message === "Token Expired") {
                 sessionStorage.clear();
                 alert('Session expired!');
-                window.href="/signin";
+                window.href = "/signin";
             }
             return newResponse;
-        } catch(error) {
-            console.log(response)
+        } catch (error) {
+            console.log(response);
             return {
                 status: 500
-            }
+            };
         }
     },
-    validateStatus: (status) => {
+    validateStatus: function validateStatus(status) {
         return status >= 200;
     }
 });
 
-export const post = uri => args => {
-    const token = getToken();
-    if(token) {
-        instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    }
+var post = exports.post = function post(uri) {
+    return function (args) {
+        var token = getToken();
+        if (token) {
+            instance.defaults.headers.common['Authorization'] = "Bearer " + token;
+        }
 
-    return instance
-        .post(uri, args)
-        .then(response => {
+        return instance.post(uri, args).then(function (response) {
             return response;
-        })
-        .catch(error => {
+        }).catch(function (error) {
             return error;
         });
+    };
 };
 
-export const put = uri => args => {
-    const token = getToken();
-    if(token) {
-        instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    }
+var put = exports.put = function put(uri) {
+    return function (args) {
+        var token = getToken();
+        if (token) {
+            instance.defaults.headers.common['Authorization'] = "Bearer " + token;
+        }
 
-    return instance
-        .put(uri, args)
-        .then(response => {
+        return instance.put(uri, args).then(function (response) {
             return response;
-        })
-        .catch(error => {
+        }).catch(function (error) {
             return error;
         });
+    };
 };
 
-export const get = uri => params => {
-    const token = getToken();
-    if(token) {
-        instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    }
+var get = exports.get = function get(uri) {
+    return function (params) {
+        var token = getToken();
+        if (token) {
+            instance.defaults.headers.common['Authorization'] = "Bearer " + token;
+        }
 
-    return instance
-        .get(uri, {
-            params
-        })
-        .then(response => {
+        return instance.get(uri, {
+            params: params
+        }).then(function (response) {
             return response;
-        })
-        .catch(error => {
+        }).catch(function (error) {
             return error;
         });
+    };
 };
 
-
-export const externalUrl = (url) => {
-    return `${url}?token=${getToken()}`
-}
+var externalUrl = exports.externalUrl = function externalUrl(url) {
+    return url + "?token=" + getToken();
+};
