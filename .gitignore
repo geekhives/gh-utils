@@ -2,3 +2,4 @@ node_modules
 yarn.lock
 *.log
 test.js
+build/*
