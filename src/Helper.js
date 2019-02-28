@@ -131,6 +131,10 @@ export function* watchApiReponse(response = {}, responseOk = function* (){}, res
             type: "SIGN_OUT"
         })
     }
+    
+    if(response.status === 401){
+        alert.error(response.data.message);
+    }
 
     if(response.status === 500) {
         yield call(alert.error, 'Oops! Something went wrong. Please contact web admin')
